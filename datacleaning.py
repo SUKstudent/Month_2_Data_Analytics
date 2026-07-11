@@ -7,27 +7,7 @@ products = pd.read_csv("/olist_products_dataset.csv")
 reviews = pd.read_csv("/olist_order_reviews_dataset.csv")
 sellers = pd.read_csv("/olist_sellers_dataset.csv")
 geolocation = pd.read_csv("/olist_geolocation_dataset.csv")
-
-print(customers.head())
-print(customers.shape)
-
-print(orders.head())      
-print(orders.shape)     
-
-print(order_items.head())
-print(order_items.shape)
-
-print(payments.head())
-print(payments.shape)
-
-print(products.head())
-print(products.shape)
-
-print(reviews.head())
-print(reviews.shape)
-
-print(sellers.head())
-print(sellers.shape)
-
-print(geolocation.head())
-print(geolocation.shape)
+list1=[customers,order_items,orders,payments,sellers,reviews,products,geolocation]
+for i in list1:
+  print(i.head())
+  print(i.shape)
