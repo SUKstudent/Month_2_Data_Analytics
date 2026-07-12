@@ -7,3 +7,8 @@
 - Imported the required Python libraries.
 - Loaded all Olist datasets into Google Colab.
 - Performed initial dataset exploration using head() and shape().
+### Day 3
+- Reviewed dataset structure using info().
+- Checked column data types.
+- Identified missing values.
+- Identified duplicate records.
