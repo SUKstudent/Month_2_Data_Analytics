@@ -11,3 +11,6 @@ list1=[customers,order_items,orders,payments,sellers,reviews,products,geolocatio
 for i in list1:
   print(i.head())
   print(i.shape)
+  print(i.duplicated())
+  i.info()
+  print(i.isnull().sum())
