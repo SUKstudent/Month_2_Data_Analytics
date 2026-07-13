@@ -12,3 +12,8 @@
 - Checked column data types.
 - Identified missing values.
 - Identified duplicate records.
+### Day 4
+- Reviewed order status and retained only delivered orders.
+- Handled missing values in Orders, Order Items, and Products datasets.
+- Verified the cleaned datasets.
+- Saved the cleaned datasets for further preprocessing.
