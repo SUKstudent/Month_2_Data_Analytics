@@ -14,3 +14,43 @@ for i in list1:
   print(i.duplicated())
   i.info()
   print(i.isnull().sum())
+# Check order status distribution
+print("Order Status Distribution:")
+print(orders['order_status'].value_counts())
+# Keep only delivered orders
+orders = orders[orders['order_status'] == 'delivered']
+# Handle missing values in Orders
+orders = orders.dropna(subset=[
+    'order_approved_at',
+    'order_delivered_customer_date'
+])
+# Handle missing values in Order Items
+order_items = order_items.dropna()
+# Handle missing values in Products
+products['product_category_name'] = products['product_category_name'].fillna('Unknown')
+products['product_name_lenght'] = products['product_name_lenght'].fillna(0)
+products['product_description_lenght'] = products['product_description_lenght'].fillna(0)
+products['product_photos_qty'] = products['product_photos_qty'].fillna(0)
+products = products.dropna(subset=[
+    'product_weight_g',
+    'product_length_cm',
+    'product_height_cm',
+    'product_width_cm'
+])
+# Verify missing values after cleaning
+print("\nOrders Missing Values:")
+print(orders.isnull().sum())
+print("\nOrder Items Missing Values:")
+print(order_items.isnull().sum())
+print("\nProducts Missing Values:")
+print(products.isnull().sum())
+# Check final dataset shapes
+print("\nFinal Dataset Shapes:")
+print("Orders:", orders.shape)
+print("Order Items:", order_items.shape)
+print("Products:", products.shape)
+# Save cleaned datasets
+orders.to_csv("orders_cleaned.csv", index=False)
+order_items.to_csv("order_items_cleaned.csv", index=False)
+products.to_csv("products_cleaned.csv", index=False)
+print("Cleaned datasets saved successfully!")
