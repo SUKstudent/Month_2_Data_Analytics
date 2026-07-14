@@ -49,6 +49,16 @@ print("\nFinal Dataset Shapes:")
 print("Orders:", orders.shape)
 print("Order Items:", order_items.shape)
 print("Products:", products.shape)
+
+# Convert purchase timestamp into datetime
+orders['order_purchase_timestamp'] = pd.to_datetime(
+    orders['order_purchase_timestamp']
+)
+# Extract Purchase Month
+orders['OrderMonth'] = orders['order_purchase_timestamp'].dt.to_period('M')
+# Verify
+print(orders[['order_purchase_timestamp', 'OrderMonth']].head())
+print(orders.dtypes)
 # Save cleaned datasets
 orders.to_csv("orders_cleaned.csv", index=False)
 order_items.to_csv("order_items_cleaned.csv", index=False)
