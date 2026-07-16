@@ -83,3 +83,17 @@ cohort_df = pd.merge(
 print(cohort_df.head())
 print(cohort_df.shape)
 print(cohort_df.info())
+# Calculate first purchase month of each customer
+cohort_df['CohortMonth'] = (
+    cohort_df.groupby('customer_unique_id')['order_purchase_timestamp']
+             .transform('min')
+             .dt.to_period('M')
+)
+# Verify
+print(
+    cohort_df[['customer_unique_id',
+               'order_purchase_timestamp',
+               'CohortMonth']].head()
+)
+# Save dataset
+cohort_df.to_csv("cohort_dataset.csv", index=False)
