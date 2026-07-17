@@ -97,3 +97,12 @@ print(
 )
 # Save dataset
 cohort_df.to_csv("cohort_dataset.csv", index=False)
+#Week2
+# Find first purchase month for each customer
+cohort = orders.groupby('customer_id')['OrderMonth'].min().reset_index()
+# Rename column
+cohort.rename(columns={'OrderMonth': 'CohortMonth'}, inplace=True)
+# Merge with orders dataset
+orders = orders.merge(cohort, on='customer_id')
+# Verify
+print(orders[['customer_id', 'OrderMonth', 'CohortMonth']].head())
