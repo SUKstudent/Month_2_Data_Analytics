@@ -106,3 +106,10 @@ cohort.rename(columns={'OrderMonth': 'CohortMonth'}, inplace=True)
 orders = orders.merge(cohort, on='customer_id')
 # Verify
 print(orders[['customer_id', 'OrderMonth', 'CohortMonth']].head())
+# Calculate year and month difference 
+year_diff = orders['OrderMonth'].dt.year - orders['CohortMonth'].dt.year
+month_diff = orders['OrderMonth'].dt.month - orders['CohortMonth'].dt.month
+# Create Cohort Index
+orders['CohortIndex'] = year_diff * 12 + month_diff + 1
+# Verify
+print(orders[['customer_id','OrderMonth','CohortMonth','CohortIndex']].head())
