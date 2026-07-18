@@ -35,3 +35,7 @@
 - Identified the first purchase month of each customer.
 - Created the Cohort Month for every customer.
 - Merged the Cohort Month into the orders dataset.
+### Day 9
+- Calculated the Cohort Index.
+- Measured the number of months between the first purchase and subsequent purchases.
+- Prepared data for retention analysis.
