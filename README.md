@@ -39,3 +39,7 @@
 - Calculated the Cohort Index.
 - Measured the number of months between the first purchase and subsequent purchases.
 - Prepared data for retention analysis.
+### Day 10
+- Grouped customers by Cohort Month and Cohort Index.
+- Counted unique customers.
+- Built the Cohort Retention Matrix using a pivot table.
