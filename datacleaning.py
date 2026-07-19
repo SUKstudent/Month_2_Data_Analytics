@@ -1,4 +1,4 @@
-import pandas as pd
+import pandas as pd #day 1
 customers = pd.read_csv("/olist_customers_dataset.csv")
 orders = pd.read_csv("/olist_orders_dataset.csv")
 order_items = pd.read_csv("/olist_order_items_dataset.csv")
@@ -17,7 +17,7 @@ for i in list1:
 # Check order status distribution
 print("Order Status Distribution:")
 print(orders['order_status'].value_counts())
-# Keep only delivered orders
+# Keep only delivered orders day 2
 orders = orders[orders['order_status'] == 'delivered']
 # Handle missing values in Orders
 orders = orders.dropna(subset=[
@@ -26,7 +26,7 @@ orders = orders.dropna(subset=[
 ])
 # Handle missing values in Order Items
 order_items = order_items.dropna()
-# Handle missing values in Products
+# Handle missing values in Products day 3
 products['product_category_name'] = products['product_category_name'].fillna('Unknown')
 products['product_name_lenght'] = products['product_name_lenght'].fillna(0)
 products['product_description_lenght'] = products['product_description_lenght'].fillna(0)
@@ -37,7 +37,7 @@ products = products.dropna(subset=[
     'product_height_cm',
     'product_width_cm'
 ])
-# Verify missing values after cleaning
+# Verify missing values after cleaning day 4
 print("\nOrders Missing Values:")
 print(orders.isnull().sum())
 print("\nOrder Items Missing Values:")
@@ -54,7 +54,7 @@ print("Products:", products.shape)
 orders['order_purchase_timestamp'] = pd.to_datetime(
     orders['order_purchase_timestamp']
 )
-# Extract Purchase Month
+# Extract Purchase Month day 5
 orders['OrderMonth'] = orders['order_purchase_timestamp'].dt.to_period('M')
 # Verify
 print(orders[['order_purchase_timestamp', 'OrderMonth']].head())
@@ -64,7 +64,7 @@ orders.to_csv("orders_cleaned.csv", index=False)
 order_items.to_csv("order_items_cleaned.csv", index=False)
 products.to_csv("products_cleaned.csv", index=False)
 print("Cleaned datasets saved successfully!")
-# Merge Orders and Customers
+# Merge Orders and Customers day 6
 cohort_df = pd.merge(
     orders,
     customers,
@@ -83,7 +83,7 @@ cohort_df = pd.merge(
 print(cohort_df.head())
 print(cohort_df.shape)
 print(cohort_df.info())
-# Calculate first purchase month of each customer
+# Calculate first purchase month of each customer day 7
 cohort_df['CohortMonth'] = (
     cohort_df.groupby('customer_unique_id')['order_purchase_timestamp']
              .transform('min')
@@ -97,8 +97,9 @@ print(
 )
 # Save dataset
 cohort_df.to_csv("cohort_dataset.csv", index=False)
+
 #Week2
-# Find first purchase month for each customer
+# Find first purchase month for each customer day 8
 cohort = orders.groupby('customer_id')['OrderMonth'].min().reset_index()
 # Rename column
 cohort.rename(columns={'OrderMonth': 'CohortMonth'}, inplace=True)
@@ -106,10 +107,23 @@ cohort.rename(columns={'OrderMonth': 'CohortMonth'}, inplace=True)
 orders = orders.merge(cohort, on='customer_id')
 # Verify
 print(orders[['customer_id', 'OrderMonth', 'CohortMonth']].head())
-# Calculate year and month difference 
+# Calculate year and month difference day 9
 year_diff = orders['OrderMonth'].dt.year - orders['CohortMonth'].dt.year
 month_diff = orders['OrderMonth'].dt.month - orders['CohortMonth'].dt.month
 # Create Cohort Index
 orders['CohortIndex'] = year_diff * 12 + month_diff + 1
 # Verify
 print(orders[['customer_id','OrderMonth','CohortMonth','CohortIndex']].head())
+# Count unique customers day 10
+cohort_data = orders.groupby(
+    ['CohortMonth', 'CohortIndex']
+)['customer_id'].nunique().reset_index()
+
+# Create retention matrix
+retention_matrix = cohort_data.pivot_table(
+    index='CohortMonth',
+    columns='CohortIndex',
+    values='customer_id'
+)
+# Verify
+print(retention_matrix)
