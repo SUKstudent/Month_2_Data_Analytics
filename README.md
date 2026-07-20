@@ -43,3 +43,7 @@
 - Grouped customers by Cohort Month and Cohort Index.
 - Counted unique customers.
 - Built the Cohort Retention Matrix using a pivot table.
+### Day 11
+- Calculated customer retention percentages.
+- Converted retention counts into percentage values.
+- Prepared data for visualization.
