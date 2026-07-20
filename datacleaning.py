@@ -127,3 +127,11 @@ retention_matrix = cohort_data.pivot_table(
 )
 # Verify
 print(retention_matrix)
+# First month's customers day 11
+cohort_size = retention_matrix.iloc[:, 0]
+# Calculate retention percentage
+retention_percentage = retention_matrix.divide(cohort_size, axis=0) * 100
+# Round values
+retention_percentage = retention_percentage.round(2)
+# Verify
+print(retention_percentage)
