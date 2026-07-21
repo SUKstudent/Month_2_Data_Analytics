@@ -47,3 +47,6 @@
 - Calculated customer retention percentages.
 - Converted retention counts into percentage values.
 - Prepared data for visualization.
+### Day 12
+- Handled missing values in the retention matrix.
+- Finalized the dataset for heatmap visualization.
