@@ -50,3 +50,7 @@
 ### Day 12
 - Handled missing values in the retention matrix.
 - Finalized the dataset for heatmap visualization.
+### Day 13
+- Evaluated cohort-wise retention trends.
+- Identified average retention across cohorts.
+- Summarized customer retention performance.
