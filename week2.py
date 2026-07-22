@@ -43,3 +43,11 @@ print(retention_percentage)
 retention_percentage = retention_percentage.fillna(0)
 # Verify
 print(retention_percentage)
+
+# Average retention by cohort
+print("Average Retention by Cohort")
+print(retention_percentage.mean(axis=1))
+
+# Average retention by month
+print("\nAverage Retention by Month")
+print(retention_percentage.mean())
