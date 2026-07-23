@@ -54,3 +54,7 @@
 - Evaluated cohort-wise retention trends.
 - Identified average retention across cohorts.
 - Summarized customer retention performance.
+### Day 14
+- Exported the retention matrix.
+- Saved the retention percentage dataset.
+- Prepared outputs for visualization in Power BI.
