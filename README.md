@@ -71,3 +71,7 @@
 - Calculated purchase frequency.
 - Identified repeat customers.
 - Identified one-time customers.
+### Day 17 – Customer Lifetime Value (CLTV)
+- Calculated purchase frequency.
+- Estimated customer lifetime value.
+- Added CLTV metric to customer summary.
