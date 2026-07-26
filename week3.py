@@ -39,8 +39,7 @@ customer_summary.head()
 # Dataset Information
 customer_summary.info()
 
-
-# Total Customers
+# Total Customers day 16
 total_customers = customer_summary["customer_unique_id"].nunique()
 
 # Total Orders
@@ -61,3 +60,14 @@ one_time_customers = customer_summary[
 print(f"Purchase Frequency : {purchase_frequency:.2f}")
 print(f"Repeat Customers : {len(repeat_customers)}")
 print(f"One-Time Customers : {len(one_time_customers)}")
+# Estimated CLTV day 17
+customer_summary["estimated_cltv"] = (
+    customer_summary["average_order_value"] *
+    customer_summary["purchase_frequency"]
+)
+# Customer Ranking
+customer_summary["cltv_rank"] = (
+    customer_summary["estimated_cltv"]
+    .rank(ascending=False)
+)
+customer_summary.head()
