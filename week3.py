@@ -60,6 +60,7 @@ one_time_customers = customer_summary[
 print(f"Purchase Frequency : {purchase_frequency:.2f}")
 print(f"Repeat Customers : {len(repeat_customers)}")
 print(f"One-Time Customers : {len(one_time_customers)}")
+
 # Estimated CLTV day 17
 customer_summary["estimated_cltv"] = (
     customer_summary["average_order_value"] *
@@ -71,3 +72,67 @@ customer_summary["cltv_rank"] = (
     .rank(ascending=False)
 )
 customer_summary.head()
+
+"""**Day 18 – Customer Segmentation**"""
+# Calculate Quantiles Once
+q25 = customer_summary["estimated_cltv"].quantile(0.25)
+q50 = customer_summary["estimated_cltv"].quantile(0.50)
+q75 = customer_summary["estimated_cltv"].quantile(0.75)
+# Customer Segmentation
+def segment(cltv):
+    if cltv >= q75:
+        return "Premium"
+    elif cltv >= q50:
+        return "High"
+    elif cltv >= q25:
+        return "Medium"
+    else:
+        return "Low"
+customer_summary["segment"] = customer_summary["estimated_cltv"].apply(segment)
+customer_summary["segment"].value_counts()
+
+"""**Day 19 – Business Insights**"""
+# Top Customers
+top_customers = customer_summary.nlargest(
+    10,
+    "estimated_cltv"
+)
+# Bottom Customers
+bottom_customers = customer_summary.nsmallest(
+    10,
+    "estimated_cltv"
+)
+# Summary Statistics
+average_cltv = customer_summary["estimated_cltv"].mean()
+median_cltv = customer_summary["estimated_cltv"].median()
+highest_cltv = customer_summary["estimated_cltv"].max()
+lowest_cltv = customer_summary["estimated_cltv"].min()
+# Segment Summary
+segment_summary = (
+    customer_summary
+    .groupby("segment")["estimated_cltv"]
+    .mean()
+)
+print(segment_summary)
+
+"""**Day 20 – Finalize & Export Dataset**"""
+# Dataset Validation
+customer_summary.info()
+customer_summary.describe()
+customer_summary.isnull().sum()
+customer_summary.duplicated().sum()
+# Export Dataset
+customer_summary.to_csv(
+    "cltv_dataset.csv",
+    index=False
+)
+print("Dataset Exported Successfully!")
+
+"""**Day 21 – Validation & Documentation**"""
+# Final Verification
+print(customer_summary.shape)
+print(customer_summary.columns)
+print(customer_summary.dtypes)
+customer_summary.describe()
+customer_summary.head()
+print("Week 3 Completed Successfully!")
