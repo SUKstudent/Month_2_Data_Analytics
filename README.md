@@ -102,7 +102,7 @@
 -Verified data model.
 ### Day 23–Dashboard Layout Design
 -Designed Power BI dashboard layout.
--Created navigation panel.
+-Created navigation panel. 
 -Applied dashboard theme.
 ### Day 24-Executive Dashboard (Page 1)
 -Created Executive Overview dashboard.
